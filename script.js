@@ -1,12 +1,15 @@
+var allFlagId = ["france", "belgique", "allemagne", "hollande", "pologne", "tcheque"];
+var actualFlagId = allFlagId[0];
+var flagIndex = 0;
+
 $(document).ready(function () {
-    // $(".drapeau").hide();
-    $("#france").show();
+    nextFlag(flagIndex);
     initialColor("france", "blue");
     initialColor("belgique", "yellow");
     initialColor("allemagne", "red");
     initialColor("hollande", "white");
     initialColor("pologne", "red");
-    initialColor("tchequie", "red");
+    initialColor("tcheque", "red");
 });
 $(function () {
     switchColor("france", "blue", "red", "white");
@@ -14,8 +17,21 @@ $(function () {
     switchColor("hollande", "blue", "red", "white");
     switchColor("allemagne", "black", "red", "yellow");
     switchColor("pologne", "white", "red", null);
-    switchColor("tchequie", "white", "red", "blue");
+    switchColor("tcheque", "white", "red", "blue");
 })
+
+$(function () {
+    $('#valider').click(function () {
+        console.log(flagIndex)
+        nextFlag(flagIndex);
+    })
+})
+
+function initialColor(flagDiv, color) {
+    $("#" + flagDiv).children().filter("div").children().each(function () {
+        $(this).addClass(color);
+    });
+}
 
 function switchColor(flagDiv, color1, color2, color3) {
     $("#" + flagDiv).children().filter("div").children().click(function () {
@@ -37,8 +53,8 @@ function switchColor(flagDiv, color1, color2, color3) {
     })
 }
 
-function initialColor(flagDiv, color) {
-    $("#" + flagDiv).children().filter("div").children().each(function () {
-        $(this).addClass(color);
-    });
+function nextFlag(index) {
+    $(".drapeau").hide();
+    $("#" + allFlagId[index]).show();
+    flagIndex++;
 }

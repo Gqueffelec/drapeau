@@ -4,7 +4,7 @@
     flex-direction: column;
 }
 
-@mixin divLayout($isRow :true) {
+@mixin divLayout($isRow :true, $number:3) {
     div {
 
         border: 2px double grey;
@@ -15,7 +15,13 @@
         }
 
         @else {
-            height: 100px;
+            @if($number==3) {
+                height: 66px;
+            }
+
+            @else {
+                height: 100px;
+            }
         }
     }
 }
@@ -39,7 +45,18 @@ h1 {
 }
 
 #allemagne,
-#hollande,
+#hollande {
+    @include flexNom();
+    @extend h1;
+
+    div {
+        border: 2px double grey;
+        display: flex;
+        flex-direction: column;
+        @include divLayout($isRow:false, $number:3);
+    }
+}
+
 #pologne {
     @include flexNom();
     @extend h1;
@@ -48,11 +65,11 @@ h1 {
         border: 2px double grey;
         display: flex;
         flex-direction: column;
-        @include divLayout($isRow:false);
+        @include divLayout($isRow:false, $number:2);
     }
 }
 
-#tchequie {
+#tcheque {
     @include flexNom();
     @extend h1;
 
@@ -109,11 +126,16 @@ h1 {
     background-color: black;
 }
 
+
+html,
 body {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
+    margin: 0;
 }
 
 #valider {

@@ -1,7 +1,6 @@
 h1, #france,
 #belgique, #allemagne,
-#hollande,
-#pologne, #tchequie {
+#hollande, #pologne, #tcheque {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
@@ -38,8 +37,7 @@ h1, #france,
 }
 
 #allemagne,
-#hollande,
-#pologne {
+#hollande {
   width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -51,8 +49,7 @@ h1, #france,
 }
 
 #allemagne div,
-#hollande div,
-#pologne div {
+#hollande div {
   border: 2px double grey;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -64,13 +61,12 @@ h1, #france,
 }
 
 #allemagne div div,
-#hollande div div,
-#pologne div div {
+#hollande div div {
   border: 2px double grey;
-  height: 100px;
+  height: 66px;
 }
 
-#tchequie {
+#pologne {
   width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -81,7 +77,34 @@ h1, #france,
           flex-direction: column;
 }
 
-#tchequie div {
+#pologne div {
+  border: 2px double grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#pologne div div {
+  border: 2px double grey;
+  height: 100px;
+}
+
+#tcheque {
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#tcheque div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -93,14 +116,14 @@ h1, #france,
   border: 2px double grey;
 }
 
-#tchequie div :first-child,
-#tchequie div :nth-child(2) {
+#tcheque div :first-child,
+#tcheque div :nth-child(2) {
   height: 100px;
   z-index: 0;
   border: 2px double grey;
 }
 
-#tchequie div #triangle {
+#tcheque div #triangle {
   position: absolute;
   height: 192px;
   top: 6px;
@@ -110,7 +133,7 @@ h1, #france,
   z-index: 2;
 }
 
-#tchequie div :last-child {
+#tcheque div :last-child {
   position: absolute;
   height: 204px;
   width: 104px;
@@ -140,6 +163,7 @@ h1, #france,
   background-color: black;
 }
 
+html,
 body {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -147,13 +171,15 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 #valider {
