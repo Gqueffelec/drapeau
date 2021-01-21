@@ -1,6 +1,9 @@
 var allFlagId = ["france", "belgique", "allemagne", "hollande", "pologne", "tcheque"];
+
 var actualFlagId = allFlagId[0];
 var flagIndex = 0;
+
+var bonneSolution = false;
 
 $(document).ready(function () {
     nextFlag(flagIndex);
@@ -22,8 +25,35 @@ $(function () {
 
 $(function () {
     $('#valider').click(function () {
-        console.log(flagIndex)
-        nextFlag(flagIndex);
+        let soluce;
+        switch (flagIndex) {
+            case 0:
+                soluce = "bluewhitered";
+                checkSolution(soluce);
+                break;
+            case 1:
+                soluce = "blackyellowred";
+                checkSolution(soluce);
+                break;
+            case 2:
+                soluce = "blackredyellow";
+                checkSolution(soluce);
+                break;
+            case 3:
+                soluce = "redwhiteblue";
+                checkSolution(soluce);
+                break;
+            case 4:
+                soluce = "whitered";
+                checkSolution(soluce);
+                break;
+            case 5:
+                soluce = "whiteredbluered";
+                checkSolution(soluce);
+                break;
+            default:
+                break;
+        }
     })
 })
 
@@ -56,5 +86,20 @@ function switchColor(flagDiv, color1, color2, color3) {
 function nextFlag(index) {
     $(".drapeau").hide();
     $("#" + allFlagId[index]).show();
-    flagIndex++;
+
+}
+
+function checkSolution(soluce) {
+    let reponse = "";
+    $("#" + allFlagId[flagIndex]).children().last().children().each(function () {
+        reponse += $(this).attr('class');
+    })
+    console.log(reponse)
+    if (soluce == reponse) {
+        alert("FUCK YEAH");
+        flagIndex++;
+        nextFlag(flagIndex);
+    } else {
+        alert("L like a LOSER")
+    }
 }
