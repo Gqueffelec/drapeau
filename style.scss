@@ -1,0 +1,55 @@
+@mixin flexNom {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+#france,
+#belgique,
+#allemagne {
+    @include flexNom();
+
+    h1 {
+        align-self: center;
+    }
+
+    div {
+
+        display: flex;
+        flex-direction: row;
+
+        div {
+            height: 200px;
+            border: 2px double black;
+            width: 30%;
+        }
+    }
+}
+
+
+.blue {
+    background-color: blue;
+}
+
+.red {
+    background-color: red;
+}
+
+.white {
+    background-color: white;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#valider {
+    margin-top: 10%;
+}
