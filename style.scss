@@ -7,7 +7,7 @@
 @mixin divLayout($isRow :true) {
     div {
 
-        border: 2px double black;
+        border: 2px double grey;
 
         @if($isRow) {
             height: 200px;
@@ -45,6 +45,7 @@ h1 {
     @extend h1;
 
     div {
+        border: 2px double grey;
         display: flex;
         flex-direction: column;
         @include divLayout($isRow:false);
@@ -59,32 +60,31 @@ h1 {
         display: flex;
         flex-direction: column;
         position: relative;
+        border: 2px double grey;
 
         :first-child,
         :nth-child(2) {
             height: 100px;
             z-index: 0;
-            border: 2px double black;
+            border: 2px double grey;
         }
 
         #triangle {
             position: absolute;
             height: 192px;
-            top: 8px;
-            left: 3px;
-            width: 95px;
+            top: 6px;
+            width: 97px;
             clip-path: polygon(0 0, 100% 50%, 0 100%);
             z-index: 2;
         }
 
         :last-child {
             position: absolute;
-            top: -1;
-            height: 208px;
+            height: 204px;
             width: 104px;
             clip-path: polygon(0 0, 100% 50%, 0 100%);
             z-index: 1;
-            background-color: black;
+            background-color: grey;
         }
     }
 }
