@@ -6,6 +6,7 @@ $(document).ready(function () {
     initialColor("allemagne", "red");
     initialColor("hollande", "white");
     initialColor("pologne", "red");
+    initialColor("tchequie", "red");
 });
 
 

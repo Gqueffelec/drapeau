@@ -1,7 +1,7 @@
 h1, #france,
 #belgique, #allemagne,
 #hollande,
-#pologne {
+#pologne, #tchequie {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
@@ -66,8 +66,58 @@ h1, #france,
 #hollande div div,
 #pologne div div {
   border: 2px double black;
-  height: 30%;
-  height: 66px;
+  height: 100px;
+}
+
+#tchequie {
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#tchequie div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+}
+
+#tchequie div :first-child,
+#tchequie div :nth-child(2) {
+  height: 100px;
+  z-index: 0;
+  border: 2px double black;
+}
+
+#tchequie div #triangle {
+  position: absolute;
+  height: 192px;
+  top: 8px;
+  left: 3px;
+  width: 95px;
+  -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
+          clip-path: polygon(0 0, 100% 50%, 0 100%);
+  z-index: 2;
+}
+
+#tchequie div :last-child {
+  position: absolute;
+  top: -1;
+  height: 208px;
+  width: 104px;
+  -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
+          clip-path: polygon(0 0, 100% 50%, 0 100%);
+  z-index: 1;
+  background-color: black;
 }
 
 .blue {
