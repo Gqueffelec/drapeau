@@ -4,31 +4,59 @@
     flex-direction: column;
 }
 
-#france,
-#belgique,
-#allemagne {
-    @include flexNom();
+@mixin divLayout($isRow :true) {
+    div {
 
-    h1 {
-        align-self: center;
+        border: 2px double black;
+
+        @if($isRow) {
+            height: 200px;
+            width: 30%;
+        }
+
+        @else {
+            height: 30%;
+            height: 66px;
+        }
     }
+}
+
+
+h1 {
+    align-self: center;
+}
+
+#france,
+#belgique {
+    @include flexNom();
+    @extend h1;
 
     div {
 
         display: flex;
         flex-direction: row;
 
-        div {
-            height: 200px;
-            border: 2px double black;
-            width: 30%;
-        }
+        @include divLayout($isRow:true);
+    }
+}
+
+#allemagne,
+#hollande,
+#pologne {
+    @include flexNom();
+    @extend h1;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        @include divLayout($isRow:false);
     }
 }
 
 
+
 .blue {
-    background-color: blue;
+    background-color: rgb(48, 48, 194);
 }
 
 .red {
@@ -41,6 +69,10 @@
 
 .yellow {
     background-color: yellow;
+}
+
+.black {
+    background-color: black;
 }
 
 body {

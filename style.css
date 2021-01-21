@@ -1,6 +1,14 @@
+h1, #france,
+#belgique, #allemagne,
+#hollande,
+#pologne {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
 #france,
-#belgique,
-#allemagne {
+#belgique {
   width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11,17 +19,8 @@
           flex-direction: column;
 }
 
-#france h1,
-#belgique h1,
-#allemagne h1 {
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-}
-
 #france div,
-#belgique div,
-#allemagne div {
+#belgique div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,15 +31,47 @@
 }
 
 #france div div,
-#belgique div div,
-#allemagne div div {
-  height: 200px;
+#belgique div div {
   border: 2px double black;
+  height: 200px;
   width: 30%;
 }
 
+#allemagne,
+#hollande,
+#pologne {
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#allemagne div,
+#hollande div,
+#pologne div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#allemagne div div,
+#hollande div div,
+#pologne div div {
+  border: 2px double black;
+  height: 30%;
+  height: 66px;
+}
+
 .blue {
-  background-color: blue;
+  background-color: #3030c2;
 }
 
 .red {
@@ -53,6 +84,10 @@
 
 .yellow {
   background-color: yellow;
+}
+
+.black {
+  background-color: black;
 }
 
 body {
