@@ -1,13 +1,14 @@
+// basic flex for div disposition
 @mixin flexNom {
     width: 300px;
     display: flex;
     flex-direction: column;
 }
 
+// function for flag div display (vertical or horizontal)
 @mixin divLayout($isRow :true, $number:3) {
     div {
-
-        border: 2px double grey;
+        border: 3px solid grey;
 
         @if($isRow) {
             height: 200px;
@@ -23,6 +24,7 @@
                 height: 100px;
             }
         }
+
     }
 }
 
@@ -38,6 +40,7 @@ h1 {
     align-self: center;
 }
 
+// vertical line flag
 #france,
 #belgique {
     @include flexNom();
@@ -52,6 +55,7 @@ h1 {
     }
 }
 
+// horizontal line flag
 #allemagne,
 #hollande {
     @include flexNom();
@@ -65,6 +69,7 @@ h1 {
     }
 }
 
+// dual line flag
 #pologne {
     @include flexNom();
     @extend h1;
@@ -77,6 +82,7 @@ h1 {
     }
 }
 
+// special css for czech flag (triangle mostly plus double div for border
 #tcheque {
     @include flexNom();
     @extend h1;
@@ -114,6 +120,7 @@ h1 {
     }
 }
 
+// class color only for the game 
 .blue {
     background-color: rgb(48, 48, 194);
 }
@@ -138,6 +145,7 @@ h1 {
     background-color: green;
 }
 
+// html no border around the background
 html,
 body {
     width: 100%;
@@ -145,12 +153,14 @@ body {
     margin: 0;
 }
 
+// main page disposition for optimal smartphone display, work for computer but not as beautifull
 body {
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
 
+    // scoreboard box display
     #scoreBoard {
         display: flex;
         flex-direction: row;
@@ -174,12 +184,14 @@ body {
     }
 }
 
+// all button param for uniformity
 button {
     height: 50px;
     width: 100px;
     align-self: center;
 }
 
+// css to simulate popUp Box for introduction and game rules
 #introduction {
     display: flex;
     flex-direction: column;
@@ -196,6 +208,7 @@ button {
     background-color: darkgray;
 }
 
+// same as previous for end game score
 #endGame {
 
     align-self: center;
@@ -203,10 +216,15 @@ button {
     @include popUpBox();
 }
 
+// time div for the actual flag guess
 #time {
     margin: 0 35%;
     padding: 5px;
     border-radius: 5px;
     background-color: lightgray;
     border: 3px solid grey;
+}
+
+.joker {
+    border: 3px double grey;
 }

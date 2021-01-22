@@ -31,7 +31,7 @@ h1, #france,
 
 #france div div,
 #belgique div div {
-  border: 2px double grey;
+  border: 3px solid grey;
   height: 200px;
   width: 30%;
 }
@@ -62,7 +62,7 @@ h1, #france,
 
 #allemagne div div,
 #hollande div div {
-  border: 2px double grey;
+  border: 3px solid grey;
   height: 66px;
 }
 
@@ -89,7 +89,7 @@ h1, #france,
 }
 
 #pologne div div {
-  border: 2px double grey;
+  border: 3px solid grey;
   height: 100px;
 }
 
@@ -275,5 +275,9 @@ button {
   border-radius: 5px;
   background-color: lightgray;
   border: 3px solid grey;
+}
+
+.joker {
+  border: 3px double grey;
 }
 /*# sourceMappingURL=style.css.map */

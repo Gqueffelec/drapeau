@@ -1,3 +1,5 @@
+// class counter, with closure object and private method
+
 var counter = function () {
     var count = 0;
 
@@ -16,6 +18,8 @@ var counter = function () {
         }
     }
 }
+
+// different counter base on the model
 var scoreCounter = counter();
 var clicCounter = counter();
 var levelCounter = counter();

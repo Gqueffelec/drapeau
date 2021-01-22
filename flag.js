@@ -1,3 +1,5 @@
+// flag class, for création of each flag in the game, just add a line with the options and to the array
+
 var count;
 var flag = function (pCountry, pOptimalClics, pNumberOfColor, color1, color2, color3) {
     var country = pCountry;
@@ -28,10 +30,14 @@ var flag = function (pCountry, pOptimalClics, pNumberOfColor, color1, color2, co
 
     }
 }
+//creation of basic flag for the game, more can be add later
+
 var flagFrance = flag("france", 7, 3, "blue", "white", "red");
 var flagBelgique = flag("belgique", 6, 3, "black", "yellow", "red");
 var flagAllemagne = flag("allemagne", 3, 3, "black", "red", "yellow");
 var flagHollande = flag("hollande", 4, 3, "red", "white", "blue");
 var flagPologne = flag("pologne", 3, 2, "white", "red");
 var flagTcheque = flag("tcheque", 7, 3, "white", "red", "blue");
+
+// array of all flag
 var allFlag = [flagFrance, flagBelgique, flagAllemagne, flagHollande, flagPologne, flagTcheque];
