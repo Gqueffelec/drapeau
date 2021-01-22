@@ -1,38 +1,10 @@
-var allFlagId = ["france", "belgique", "allemagne", "hollande", "pologne", "tcheque"];
 var allColorSwitch = ["blue", "green", "red", "yellow", "black", "white"];
-var actualFlagId = allFlagId[0];
-var flagIndex = 0;
-var numberOfClic = 0;
-var start = 0;
-var end = 0;
-var diff = 0;
-var timer = 0;
 var endGame = false;
-var time;
-var clicPerFlag = 0;
 var switchColorEnable = true;
-var scoreCounter = function () {
-    var scoreCount = 0;
-
-    function addPoints(value) {
-        scoreCount += value;
-    };
-    return {
-        increase: function (value) {
-            addPoints(value);
-        },
-        decrease: function () {
-            addPoints(-1);
-        },
-        getScore: function () {
-            return scoreCount;
-        }
-    }
-}
-var mainScore = scoreCounter();
+var actualFlagId = allFlag[levelCounter.getValue()].getCountry();
 
 window.onbeforeunload = function (event) {
-    if (flagIndex < allColorSwitch.length) {
+    if (levelCounter.getValue() < allFlag.length) {
         saveData();
     }
 }
@@ -41,7 +13,7 @@ $(document).ready(function () {
     popUp();
     $("#start").click(function () {
         $("#introduction").remove();
-        nextFlag(flagIndex);
+        nextFlag(levelCounter.getValue());
         start = new Date();
         $("body").removeClass("popup");
         $("#scoreBoard").show();
@@ -53,14 +25,14 @@ $(document).ready(function () {
 
 $(function () {
     $("#valider").click(function () {
-        flagIndex++;
-        nextFlag(flagIndex);
+        levelCounter.increase(1)
+        nextFlag(levelCounter.getValue());
         updateScore()
         $(this).hide();
-        if (flagIndex == 6) {
+        if (levelCounter.getValue() == 6) {
             endGame = true;
             popUp();
-            $("#endGame").html("Bien joué ! <br> Vous avez réalisé : " + mainScore.getScore + "points avec " + numberOfClic + " clics")
+            $("#endGame").html("Bien joué ! <br> Vous avez réalisé : " + scoreCounter.getValue() + " points avec " + clicCounter.getValue() + " clics")
         }
         switchColorEnable = true;
     })
@@ -75,8 +47,8 @@ function initialColor(flagDiv, color) {
 function switchColor(flagDiv) {
     $("#" + flagDiv).children().filter("div").children().click(function () {
         if (switchColorEnable) {
-            numberOfClic++;
-            clicPerFlag++;
+            clicCounter.increase(1);
+            clicPerFlagCounter.increase(1);
             updateClic();
             let color = $(this).attr("class");
             let newColorIndex = allColorSwitch.indexOf(color) + 1;
@@ -85,44 +57,16 @@ function switchColor(flagDiv) {
             }
             let newColor = allColorSwitch[newColorIndex];
             $(this).removeClass(color).addClass(newColor);
-            let soluce;
-            switch (flagIndex) {
-                case 0:
-                    soluce = "bluewhitered";
-                    checkSolution(soluce, 7);
-                    break;
-                case 1:
-                    soluce = "blackyellowred";
-                    checkSolution(soluce, 6);
-                    break;
-                case 2:
-                    soluce = "blackredyellow";
-                    checkSolution(soluce, 3);
-                    break;
-                case 3:
-                    soluce = "redwhiteblue";
-                    checkSolution(soluce, 4);
-                    break;
-                case 4:
-                    soluce = "whitered";
-                    checkSolution(soluce, 3);
-                    break;
-                case 5:
-                    soluce = "whiteredbluered";
-                    checkSolution(soluce, 7);
-                    break;
-                default:
-                    break;
-            }
+            checkSolution();
         }
     })
 }
 
 function nextFlag(index) {
-    $(".drapeau").hide();
-    $("#" + allFlagId[index]).show();
-    updateLevel();
     if (index != 6) {
+        $(".drapeau").hide();
+        $("#" + allFlag[index].getCountry()).show();
+        updateLevel();
         start = new Date();
         chrono();
     } else {
@@ -130,51 +74,32 @@ function nextFlag(index) {
     }
 }
 
-function checkSolution(soluce, optimalClicByCountry) {
-    let reponse = "";
-    $("#" + allFlagId[flagIndex]).children().last().children().each(function () {
-        reponse += $(this).attr('class');
+function checkSolution() {
+    var soluce = allFlag[levelCounter.getValue()].getColors();
+    var optimalClic = allFlag[levelCounter.getValue()].getOptmimalClics();
+    var reponse = new Array(soluce.length);
+    $("#" + allFlag[levelCounter.getValue()].getCountry()).children().last().children().each(function (i) {
+        reponse[i] = $(this).attr('class');
     })
-    if (soluce == reponse) {
-        calculPoints(optimalClicByCountry, clicPerFlag);
+    if (levelCounter.getValue() == 5) {
+        reponse.pop();
+    }
+    if (JSON.stringify(soluce) === JSON.stringify(reponse)) {
+        calculPoints(optimalClic, clicPerFlagCounter.getValue());
         clearTimeout(timer);
         $("#valider").show();
-        clicPerFlag = 0;
+        clicPerFlagCounter.decrease(clicPerFlagCounter.getValue());
         switchColorEnable = false;
     }
 }
 
+
 function updateLevel() {
-    $('#level').html("Niveau " + flagIndex + "/6 !");
+    $('#level').html("Niveau " + levelCounter.getValue() + "/6 !");
 }
 
 function updateClic() {
-    $('#clic').html("Nombre de clics : " + numberOfClic);
-}
-
-function chrono() {
-    end = new Date();
-    diff = end - start;
-    diff = new Date(diff);
-    var msec = diff.getMilliseconds();
-    var sec = diff.getSeconds();
-    var min = diff.getMinutes();
-    if (msec < 10) {
-        msec = "00" + msec
-    } else if (msec < 100) {
-        msec = "0" + msec
-    }
-    time = addZero(min) + ":" + addZero(sec) + ":" + msec;
-    $('#time').html(time);
-    timer = setTimeout("chrono()", 10);
-}
-
-function addZero(nombre) {
-    if (nombre < 10) {
-        return "0" + nombre;
-    } else {
-        return nombre;
-    }
+    $('#clic').html("Nombre de clics : " + clicCounter.getValue());
 }
 
 function popUp() {
@@ -194,17 +119,17 @@ function popUp() {
 }
 
 function updateScore() {
-    $('#score').html("Score : " + mainScore.getScore());
+    $('#score').html("Score : " + scoreCounter.getValue());
 }
 
 function calculPoints(optimalClicNumber, actualClicNumber) {
     let clicScore = actualClicNumber - optimalClicNumber;
     if (clicScore == 0 && diff.getSeconds() <= optimalClicNumber - 2) {
-        mainScore.increase(3);
+        scoreCounter.increase(3);
     } else if (clicScore == 0) {
-        mainScore.increase(2);
+        scoreCounter.increase(2);
     } else {
-        mainScore.increase(1);
+        scoreCounter.increase(1);
     }
     updateScore();
 }
@@ -216,22 +141,22 @@ function initialize() {
     initialColor("hollande", "white");
     initialColor("pologne", "red");
     initialColor("tcheque", "red");
-    switchColor("france", );
-    switchColor("belgique", );
-    switchColor("hollande", );
-    switchColor("allemagne", );
-    switchColor("pologne", );
-    switchColor("tcheque", );
+    switchColor("france");
+    switchColor("belgique");
+    switchColor("hollande");
+    switchColor("allemagne");
+    switchColor("pologne");
+    switchColor("tcheque");
+    $("#joker").click(function () {
+        joker()
+    });
 
 
     const save = JSON.parse(localStorage.getItem("save"));
-    if (save == null || save.level == 0) {
-        numberOfClic = 0;
-        flagIndex = 0;
-    } else {
-        mainScore.increase(save.score);
-        numberOfClic += save.clicNumber;
-        flagIndex = save.level;
+    if (save == null || save.level == 0) {} else {
+        scoreCounter.increase(save.score);
+        clicCounter.increase(save.clicNumber);
+        levelCounter.increase(save.level);
     }
     updateLevel();
     updateClic();
@@ -240,10 +165,22 @@ function initialize() {
 
 function saveData() {
     const save = {
-        level: flagIndex,
-        "score": mainScore.getScore(),
-        "clicNumber": numberOfClic
+        level: levelCounter.getValue(),
+        "score": scoreCounter.getValue(),
+        "clicNumber": clicCounter.getValue()
     };
     localStorage.setItem("save", JSON.stringify(save));
     return false;
+}
+
+function joker() {
+    if (scoreCounter.getValue() > 0) {
+        scoreCounter.decrease(1);
+        updateScore();
+    }
+    var numberOfDiv = $("#" + allFlag[levelCounter.getValue()].getCountry()).children().last().children().length;
+    if (numberOfDiv == 4) {
+        numberOfDiv = 3;
+    }
+    var randomNthChild = Math.floor(Math.random() * numberOfDiv) + 1;
 }
