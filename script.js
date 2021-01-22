@@ -6,21 +6,31 @@ var start = 0;
 var end = 0;
 var diff = 0;
 var timer = 0;
+var endGame = false;
+var time;
+var score = 0;
+var clicPerFlag = 0;
 
 $(document).ready(function () {
-    nextFlag(flagIndex);
+    popUp();
+    $("#start").click(function () {
+        $("#introduction").remove();
+        nextFlag(flagIndex);
+        start = new Date();
+        $("body").removeClass("popup");
+        $("#scoreBoard").show();
+    })
     initialColor("france", "blue");
     initialColor("belgique", "yellow");
     initialColor("allemagne", "red");
     initialColor("hollande", "white");
     initialColor("pologne", "red");
     initialColor("tcheque", "red");
-    updateScore();
-    start = new Date();
-    chrono();
+    updateLevel();
     updateClic();
-    $('#valider').hide();
+    updateScore();
 });
+
 $(function () {
     switchColor("france", "blue", "red", "white");
     switchColor("belgique", "black", "red", "yellow");
@@ -32,40 +42,10 @@ $(function () {
 
 $(function () {
     $('#valider').click(function () {
-        let soluce;
-        switch (flagIndex) {
-            case 0:
-                soluce = "bluewhitered";
-                checkSolution(soluce);
-                updateScore();
-                break;
-            case 1:
-                soluce = "blackyellowred";
-                checkSolution(soluce);
-                updateScore();
-                break;
-            case 2:
-                soluce = "blackredyellow";
-                checkSolution(soluce);
-                updateScore();
-                break;
-            case 3:
-                soluce = "redwhiteblue";
-                checkSolution(soluce);
-                updateScore();
-                break;
-            case 4:
-                soluce = "whitered";
-                checkSolution(soluce);
-                updateScore();
-                break;
-            case 5:
-                soluce = "whiteredbluered";
-                checkSolution(soluce);
-                updateScore();
-                break;
-            default:
-                break;
+        if (flagIndex == 5) {
+            endGame = true;
+            popUp();
+            $("#endGame").html("Bien joué ! <br> Votre temps est de = " + time + " avec " + numberOfClic + " clics")
         }
     })
 })
@@ -89,7 +69,9 @@ function switchColor(flagDiv, color1, color2, color3) {
 
     $("#" + flagDiv).children().filter("div").children().click(function () {
         numberOfClic++;
+        clicPerFlag++;
         updateClic();
+
         let color = $(this).attr("class");
         if (color3 == null) {
             color3 = color1;
@@ -109,27 +91,27 @@ function switchColor(flagDiv, color1, color2, color3) {
         switch (flagIndex) {
             case 0:
                 soluce = "bluewhitered";
-                checkSolution(soluce);
+                checkSolution(soluce, 3);
                 break;
             case 1:
                 soluce = "blackyellowred";
-                checkSolution(soluce);
+                checkSolution(soluce, 3);
                 break;
             case 2:
                 soluce = "blackredyellow";
-                checkSolution(soluce);
+                checkSolution(soluce, 3);
                 break;
             case 3:
                 soluce = "redwhiteblue";
-                checkSolution(soluce);
+                checkSolution(soluce, 3);
                 break;
             case 4:
                 soluce = "whitered";
-                checkSolution(soluce);
+                checkSolution(soluce, 1);
                 break;
             case 5:
                 soluce = "whiteredbluered";
-                checkSolution(soluce);
+                checkSolution(soluce, 3);
                 break;
             default:
                 break;
@@ -140,20 +122,28 @@ function switchColor(flagDiv, color1, color2, color3) {
 function nextFlag(index) {
     $(".drapeau").hide();
     $("#" + allFlagId[index]).show();
-
+    if (index != 6) {
+        start = new Date();
+        chrono();
+    } else {
+        $('#time').hide();
+    }
 }
 
-function checkSolution(soluce) {
+function checkSolution(soluce, optimalClicByCountry) {
     let reponse = "";
     $("#" + allFlagId[flagIndex]).children().last().children().each(function () {
         reponse += $(this).attr('class');
     })
     if (soluce == reponse) {
+        calculPoints(optimalClicByCountry, clicPerFlag);
+        clearTimeout(timer);
         $("#valider").show();
+        clicPerFlag = 0;
     }
 }
 
-function updateScore() {
+function updateLevel() {
     $('#level').html("Niveau " + flagIndex + "/6 !");
 }
 
@@ -165,11 +155,17 @@ function chrono() {
     end = new Date();
     diff = end - start;
     diff = new Date(diff);
+    var msec = diff.getMilliseconds();
     var sec = diff.getSeconds();
     var min = diff.getMinutes();
-    var hr = diff.getHours() - 1;
-    $('#time').html(addZero(hr) + ":" + addZero(min) + ":" + addZero(sec));
-    timer = setTimeout("chrono()", 1000);
+    if (msec < 10) {
+        msec = "00" + msec
+    } else if (msec < 100) {
+        msec = "0" + msec
+    }
+    time = addZero(min) + ":" + addZero(sec) + ":" + msec;
+    $('#time').html(time);
+    timer = setTimeout("chrono()", 10);
 }
 
 function addZero(nombre) {
@@ -178,4 +174,25 @@ function addZero(nombre) {
     } else {
         return nombre;
     }
+}
+
+function popUp() {
+    $("body").addClass("popup");
+    $('.drapeau').hide();
+    $("#scoreBoard").hide();
+    $('#valider').hide();
+    if (!endGame) {
+        $("#endGame").hide();
+    } else {
+        $("#endGame").show();
+        $("#introduction").hide();
+    }
+}
+
+function updateScore() {
+    $('#score').html("Score : " + score);
+}
+
+function calculPoints(optimalClicNumber, actualClicNumber) {
+    console.log(actualClicNumber - optimalClicNumber);
 }

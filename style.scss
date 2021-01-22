@@ -26,6 +26,14 @@
     }
 }
 
+@mixin popUpBox() {
+    border: 5px inset grey;
+    background: white;
+    margin: 5%;
+    padding: 5%;
+    box-shadow: 5px 5px 5px black;
+}
+
 h1 {
     align-self: center;
 }
@@ -126,6 +134,10 @@ h1 {
     background-color: black;
 }
 
+.green {
+    background-color: green;
+}
+
 html,
 body {
     width: 100%;
@@ -166,7 +178,31 @@ body {
     }
 }
 
-#valider {
+button {
     height: 50px;
     width: 100px;
+    align-self: center;
+}
+
+#introduction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @include popUpBox();
+
+    p {
+        padding: 0 10%;
+        width: 70%;
+    }
+}
+
+.popup {
+    background-color: darkgray;
+}
+
+#endGame {
+
+    align-self: center;
+    justify-self: center;
+    @include popUpBox();
 }

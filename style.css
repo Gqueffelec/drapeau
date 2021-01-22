@@ -163,6 +163,10 @@ h1, #france,
   background-color: black;
 }
 
+.green {
+  background-color: green;
+}
+
 html,
 body {
   width: 100%;
@@ -221,8 +225,53 @@ body #validation {
   height: 100px;
 }
 
-#valider {
+button {
   height: 50px;
   width: 100px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+#introduction {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 5px inset grey;
+  background: white;
+  margin: 5%;
+  padding: 5%;
+  -webkit-box-shadow: 5px 5px 5px black;
+          box-shadow: 5px 5px 5px black;
+}
+
+#introduction p {
+  padding: 0 10%;
+  width: 70%;
+}
+
+.popup {
+  background-color: darkgray;
+}
+
+#endGame {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  border: 5px inset grey;
+  background: white;
+  margin: 5%;
+  padding: 5%;
+  -webkit-box-shadow: 5px 5px 5px black;
+          box-shadow: 5px 5px 5px black;
 }
 /*# sourceMappingURL=style.css.map */
