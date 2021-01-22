@@ -10,7 +10,7 @@ var timer = 0;
 var endGame = false;
 var time;
 var clicPerFlag = 0;
-
+var switchColorEnable = true;
 var scoreCounter = function () {
     var scoreCount = 0;
 
@@ -55,6 +55,7 @@ $(function () {
             popUp();
             $("#endGame").html("Bien joué ! <br> Vous avez réalisé : " + score + "points avec " + numberOfClic + " clics")
         }
+        switchColorEnable = true;
     })
 })
 
@@ -67,44 +68,46 @@ function initialColor(flagDiv, color) {
 function switchColor(flagDiv) {
 
     $("#" + flagDiv).children().filter("div").children().click(function () {
-        numberOfClic++;
-        clicPerFlag++;
-        updateClic();
-        let color = $(this).attr("class");
-        let newColorIndex = allColorSwitch.indexOf(color) + 1;
-        if (newColorIndex == 6) {
-            newColorIndex = 0;
-        }
-        let newColor = allColorSwitch[newColorIndex];
-        $(this).removeClass(color).addClass(newColor);
-        let soluce;
-        switch (flagIndex) {
-            case 0:
-                soluce = "bluewhitered";
-                checkSolution(soluce, 7);
-                break;
-            case 1:
-                soluce = "blackyellowred";
-                checkSolution(soluce, 6);
-                break;
-            case 2:
-                soluce = "blackredyellow";
-                checkSolution(soluce, 3);
-                break;
-            case 3:
-                soluce = "redwhiteblue";
-                checkSolution(soluce, 4);
-                break;
-            case 4:
-                soluce = "whitered";
-                checkSolution(soluce, 3);
-                break;
-            case 5:
-                soluce = "whiteredbluered";
-                checkSolution(soluce, 7);
-                break;
-            default:
-                break;
+        if (switchColorEnable) {
+            numberOfClic++;
+            clicPerFlag++;
+            updateClic();
+            let color = $(this).attr("class");
+            let newColorIndex = allColorSwitch.indexOf(color) + 1;
+            if (newColorIndex == 6) {
+                newColorIndex = 0;
+            }
+            let newColor = allColorSwitch[newColorIndex];
+            $(this).removeClass(color).addClass(newColor);
+            let soluce;
+            switch (flagIndex) {
+                case 0:
+                    soluce = "bluewhitered";
+                    checkSolution(soluce, 7);
+                    break;
+                case 1:
+                    soluce = "blackyellowred";
+                    checkSolution(soluce, 6);
+                    break;
+                case 2:
+                    soluce = "blackredyellow";
+                    checkSolution(soluce, 3);
+                    break;
+                case 3:
+                    soluce = "redwhiteblue";
+                    checkSolution(soluce, 4);
+                    break;
+                case 4:
+                    soluce = "whitered";
+                    checkSolution(soluce, 3);
+                    break;
+                case 5:
+                    soluce = "whiteredbluered";
+                    checkSolution(soluce, 7);
+                    break;
+                default:
+                    break;
+            }
         }
     })
 }
@@ -130,6 +133,7 @@ function checkSolution(soluce, optimalClicByCountry) {
         clearTimeout(timer);
         $("#valider").show();
         clicPerFlag = 0;
+        switchColorEnable = false;
 
     }
 }
