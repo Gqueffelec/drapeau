@@ -31,6 +31,14 @@ var scoreCounter = function () {
 }
 var mainScore = scoreCounter();
 
+window.onbeforeunload = function (event) {
+    var event = event || window.event;
+    if (event) {
+        event.returnValue = 'Are you sure?';
+        saveData();
+    }
+};
+
 $(document).ready(function () {
     popUp();
     $("#start").click(function () {
@@ -66,7 +74,6 @@ function initialColor(flagDiv, color) {
 }
 
 function switchColor(flagDiv) {
-
     $("#" + flagDiv).children().filter("div").children().click(function () {
         if (switchColorEnable) {
             numberOfClic++;
@@ -115,6 +122,7 @@ function switchColor(flagDiv) {
 function nextFlag(index) {
     $(".drapeau").hide();
     $("#" + allFlagId[index]).show();
+    updateLevel();
     if (index != 6) {
         start = new Date();
         chrono();
@@ -134,7 +142,6 @@ function checkSolution(soluce, optimalClicByCountry) {
         $("#valider").show();
         clicPerFlag = 0;
         switchColorEnable = false;
-
     }
 }
 
@@ -218,4 +225,18 @@ function initialize() {
     switchColor("allemagne", );
     switchColor("pologne", );
     switchColor("tcheque", );
+    const save = localStorage.getItem("save");
+    console.log(save);
+}
+
+function saveData() {
+    const save = {
+        level: flagIndex,
+        "score": mainScore.getScore(),
+        "clicNumber": numberOfClic
+    };
+    console.log(JSON.stringify(save));
+    localStorage.setItem("save", JSON.stringify(save));
+
+    return false;
 }
