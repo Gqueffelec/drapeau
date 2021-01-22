@@ -46,6 +46,7 @@ $(document).ready(function () {
         $("body").removeClass("popup");
         $("#scoreBoard").show();
         $("#time").show();
+        $("#joker").show();
     })
     initialize();
 })
@@ -182,6 +183,7 @@ function popUp() {
     $('#time').hide();
     $("#scoreBoard").hide();
     $('#valider').hide();
+    $('#joker').hide();
     if (!endGame) {
         $("#endGame").hide();
     } else {
