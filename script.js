@@ -32,12 +32,10 @@ var scoreCounter = function () {
 var mainScore = scoreCounter();
 
 window.onbeforeunload = function (event) {
-    var event = event || window.event;
-    if (event) {
-        event.returnValue = 'Are you sure?';
+    if (flagIndex < allColorSwitch.length) {
         saveData();
     }
-};
+}
 
 $(document).ready(function () {
     popUp();
@@ -50,7 +48,7 @@ $(document).ready(function () {
         $("#time").show();
     })
     initialize();
-});
+})
 
 $(function () {
     $("#valider").click(function () {
@@ -61,7 +59,7 @@ $(function () {
         if (flagIndex == 6) {
             endGame = true;
             popUp();
-            $("#endGame").html("Bien joué ! <br> Vous avez réalisé : " + score + "points avec " + numberOfClic + " clics")
+            $("#endGame").html("Bien joué ! <br> Vous avez réalisé : " + mainScore.getScore + "points avec " + numberOfClic + " clics")
         }
         switchColorEnable = true;
     })
@@ -189,6 +187,7 @@ function popUp() {
     } else {
         $("#endGame").show();
         $("#introduction").hide();
+        localStorage.clear();
     }
 }
 
@@ -197,7 +196,6 @@ function updateScore() {
 }
 
 function calculPoints(optimalClicNumber, actualClicNumber) {
-    console.log(actualClicNumber);
     let clicScore = actualClicNumber - optimalClicNumber;
     if (clicScore == 0 && diff.getSeconds() <= optimalClicNumber - 2) {
         mainScore.increase(3);
@@ -216,17 +214,26 @@ function initialize() {
     initialColor("hollande", "white");
     initialColor("pologne", "red");
     initialColor("tcheque", "red");
-    updateLevel();
-    updateClic();
-    updateScore();
     switchColor("france", );
     switchColor("belgique", );
     switchColor("hollande", );
     switchColor("allemagne", );
     switchColor("pologne", );
     switchColor("tcheque", );
-    const save = localStorage.getItem("save");
-    console.log(save);
+
+
+    const save = JSON.parse(localStorage.getItem("save"));
+    if (save == null || save.level == 0) {
+        numberOfClic = 0;
+        flagIndex = 0;
+    } else {
+        mainScore.increase(save.score);
+        numberOfClic += save.clicNumber;
+        flagIndex = save.level;
+    }
+    updateLevel();
+    updateClic();
+    updateScore();
 }
 
 function saveData() {
@@ -235,8 +242,6 @@ function saveData() {
         "score": mainScore.getScore(),
         "clicNumber": numberOfClic
     };
-    console.log(JSON.stringify(save));
     localStorage.setItem("save", JSON.stringify(save));
-
     return false;
 }
