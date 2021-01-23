@@ -35,7 +35,7 @@ function popUp() {
     $('#joker').hide();
     if (!endGame) {
         $("#endGame").hide();
-        gameRules();
+        //    gameRules();
     } else {
         $("#endGame").show();
         $("#introduction").hide();
