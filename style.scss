@@ -186,21 +186,27 @@ body {
 
 // all button param for uniformity
 button {
+    border-radius: 10px;
     height: 50px;
-    width: 100px;
+    width: 120px;
     align-self: center;
+    font-size: large;
 }
 
 // css to simulate popUp Box for introduction and game rules
 #introduction {
+    position: relative;
+    left: -30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 290px;
+    height: 450px;
+    margin: 0;
     @include popUpBox();
 
     p {
         padding: 0 10%;
-        width: 70%;
     }
 }
 

@@ -21,9 +21,11 @@ $(document).ready(function () {
         $("#scoreBoard").show();
         $("#time").show();
         $("#joker").show();
+        $('#skip').show();
     })
     initialize();
 })
+
 // function to smilaute starting and ending popUp
 // hiding most of the componant and apply background effect on body to make it "shadowed"
 function popUp() {
@@ -33,6 +35,7 @@ function popUp() {
     $("#scoreBoard").hide();
     $('#valider').hide();
     $('#joker').hide();
+    $('#skip').hide();
     if (!endGame) {
         $("#endGame").hide();
         //    gameRules();
@@ -64,8 +67,9 @@ function initialize() {
 
     // parse du JSON to recover saved data 
     const save = JSON.parse(localStorage.getItem("save"));
-    console.log(save.time)
-    if (save == null || save.level == 0) {} else {
+    if (save == null || save.level == 0) {
+
+    } else {
         scoreCounter.increase(save.score);
         clicCounter.increase(save.clicNumber);
         levelCounter.increase(save.level);

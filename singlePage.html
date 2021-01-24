@@ -9,8 +9,8 @@
     <script src="flag.js"></script>
     <script src="counter.js"></script>
     <script src="chrono.js"></script>
-    <script src="gameRules.js"></script>
     <script src="script.js"></script>
+    <script src="gameRules.js"></script>
     <title>Document</title>
 </head>
 
@@ -23,8 +23,9 @@
     <div id="flags">
         <span id="time"></span>
         <div id="introduction">
-            <p></p>
-            <button id="start">C'est parti !</button>
+            <p id="texte"></p>
+            <button id="next">Next</button>
+            <button id="skipIntroduction">Skip</button>
         </div>
         <div id="endGame">
         </div>
@@ -79,6 +80,9 @@
     </div>
     <div id="joker">
         <button>Joker (1pt)</button>
+    </div>
+    <div id="skip">
+        <button>Abandonner</button>
     </div>
     <div id="validation">
         <button id="valider" value="valider">Valider</button>

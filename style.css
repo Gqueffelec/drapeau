@@ -220,14 +220,18 @@ body #validation {
 }
 
 button {
+  border-radius: 10px;
   height: 50px;
-  width: 100px;
+  width: 120px;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  font-size: large;
 }
 
 #introduction {
+  position: relative;
+  left: -30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -238,6 +242,9 @@ button {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  width: 290px;
+  height: 450px;
+  margin: 0;
   border: 5px inset grey;
   background: white;
   margin: 5%;
@@ -248,7 +255,6 @@ button {
 
 #introduction p {
   padding: 0 10%;
-  width: 70%;
 }
 
 .popup {
