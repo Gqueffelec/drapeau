@@ -1,4 +1,4 @@
-// Intro text
+// Intro text, more can be added
 
 const texts = ["Bienvenue sur Question pour un Drapeau !",
     "Le but du jeu ici va être de compléter les drapeaux dont le pays s'affiche au dessus.",
@@ -35,7 +35,6 @@ $(function () {
 })
 
 function randomLetter() {
-
     var max = texts[i].length;
     var maxRandom = options.characters.length;
     if (actualIterations != options.iterations) {
@@ -56,7 +55,16 @@ function randomLetter() {
             $("#next").show();
             if (i == texts.length) {
                 $("#next").html("C'est parti !").off('click').attr("id", "start");
-                start();
+                $("#start").click(function () {
+                    $("#introduction").remove();
+                    nextFlag(levelCounter.getValue());
+                    start = new Date();
+                    $("body").removeClass("popup");
+                    $("#scoreBoard").show();
+                    $("#time").show();
+                    $("#joker").show();
+                    $('#skip').show();
+                })
             }
         }
     }

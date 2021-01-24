@@ -2,7 +2,7 @@ var allColorSwitch = ["blue", "green", "red", "yellow", "black", "white"];
 var endGame = false;
 var switchColorEnable = true;
 var actualFlagId = allFlag[levelCounter.getValue()].getCountry();
-
+var saveOn = false;
 
 // function call on refesh or exit
 window.onbeforeunload = function (event) {
@@ -12,18 +12,30 @@ window.onbeforeunload = function (event) {
 }
 // load only when the page is totally loaded
 $(document).ready(function () {
-    popUp();
-    $("#start").click(function () {
+    initialize();
+    console.log(saveOn);
+    if (saveOn == false) {
+        popUp();
+        $("#start").click(function () {
+            $("#introduction").remove();
+            nextFlag(levelCounter.getValue());
+            start = new Date();
+            $("body").removeClass("popup");
+            $("#scoreBoard").show();
+            $("#time").show();
+            $("#joker").show();
+            $('#skip').show();
+        })
+    } else {
+        $("#endGame").hide();
         $("#introduction").remove();
         nextFlag(levelCounter.getValue());
-        start = new Date();
         $("body").removeClass("popup");
         $("#scoreBoard").show();
         $("#time").show();
         $("#joker").show();
         $('#skip').show();
-    })
-    initialize();
+    }
 })
 
 // function to smilaute starting and ending popUp
@@ -67,23 +79,26 @@ function initialize() {
 
     // parse du JSON to recover saved data 
     const save = JSON.parse(localStorage.getItem("save"));
-    if (save == null || save.level == 0) {
+    if (save == null) {
 
     } else {
         scoreCounter.increase(save.score);
         clicCounter.increase(save.clicNumber);
         levelCounter.increase(save.level);
-        start = diff;
+        start = new Date() - new Date(save.time);
+        saveOn = true;
+        console.log(start);
     }
     updateLevel();
     updateClic();
     updateScore();
     validateButton();
+    giveUp();
 }
 
 // add click function on the validate Button
 function validateButton() {
-    $("#valider").click(function () {
+    $("#valider").hide().click(function () {
         var optimalClic = allFlag[levelCounter.getValue()].getOptmimalClics();
         calculPoints(optimalClic, clicPerFlagCounter.getValue());
         clicPerFlagCounter.decrease(clicPerFlagCounter.getValue());
@@ -123,6 +138,7 @@ function switchColor(flagDiv) {
             $(this).removeClass(color).addClass(newColor);
             checkSolution();
         }
+        saveData();
     })
 }
 
@@ -142,6 +158,8 @@ function checkSolution() {
     if (JSON.stringify(soluce) === JSON.stringify(reponse)) {
         clearTimeout(timer);
         $("#valider").show();
+        $("#skip").hide();
+        $("#joker").hide();
         // can't switch color once everything is good 
         switchColorEnable = false;
         $('#joker button').prop("disabled", true);
@@ -153,7 +171,10 @@ function nextFlag(index) {
         $(".drapeau").hide();
         $("#" + allFlag[index].getCountry()).show();
         updateLevel();
-        start = new Date();
+        if (!saveOn) {
+            start = new Date();
+        }
+        saveOn = false;
         chrono();
     } else {
         $('#time').hide();
@@ -221,4 +242,16 @@ function joker() {
     updateScore();
     divToLock.removeClass().addClass("joker").addClass(allFlag[levelCounter.getValue()].getColor(randomNthChild));
     checkSolution();
+}
+
+function giveUp() {
+    $("#skip button").click(function () {
+        levelCounter.increase(1);
+        nextFlag(levelCounter.getValue());
+        if (levelCounter.getValue() == 6) {
+            endGame = true;
+            popUp();
+            $("#endGame").html("Bien joué ! <br> Vous avez réalisé : " + scoreCounter.getValue() + " points avec " + clicCounter.getValue() + " clics")
+        }
+    })
 }
