@@ -19,7 +19,6 @@ window.onbeforeunload = function (event) {
 // load only when the page is totally loaded
 $(document).ready(function () {
     initialize();
-    console.log(saveOn);
     if (saveOn == false) {
         popUp();
     } else {
@@ -107,7 +106,7 @@ function validateButton() {
         $(".drapeau").children().remove();
         switchColorEnable = true;
         // if it was the last flag, validate the game and display the final score
-        if (levelCounter.getValue() == 6) {
+        if (levelCounter.getValue() == allFlag.length) {
             endGame = true;
             popUp();
             $("#points p").html("Bien joué ! <br> Vous avez réalisé un total de : " + scoreCounter.getValue() + " points avec " + clicCounter.getValue() + " clics")
@@ -144,12 +143,10 @@ function switchColor(flagDiv) {
 }
 // check if the color actually displayed are the same than the one in the flag data
 function checkSolution(flagDiv) {
-    console.log(allFlag[levelCounter.getValue()].getCountry());
     var soluce = new Array(allFlag[levelCounter.getValue()].getColors().length);
     for (let i = 0; i < soluce.length; i++) {
         soluce[i] = allFlag[levelCounter.getValue()].getColor(i);
     }
-    console.log(typeof soluce)
     var reponse = new Array(soluce.length);
     $("#" + flagDiv).children().last().children().each(function (i) {
         reponse[i] = "" + $(this).attr('class').replace("joker ", "");
@@ -173,7 +170,7 @@ function checkSolution(flagDiv) {
 }
 // switch the game to the next flag and start new chrono
 function nextFlag(index) {
-    if (index != 6) {
+    if (index != allFlag.length) {
         $(".drapeau").children().each(function () {
             $(this).remove();
         });
@@ -210,7 +207,7 @@ function calculPoints(optimalClicNumber, actualClicNumber) {
 }
 // update displayed level to the actual one
 function updateLevel() {
-    $('#level').html("Niveau " + (levelCounter.getValue() + 1) + "/6 !");
+    $('#level').html("Niveau " + (levelCounter.getValue() + 1) + "/" + allFlag.length + "!");
 }
 // update number of clicks displayed 
 function updateClic() {
@@ -265,7 +262,7 @@ function giveUp() {
         $('.drapeau').children().remove();
         levelCounter.increase(1);
         nextFlag(levelCounter.getValue());
-        if (levelCounter.getValue() == 6) {
+        if (levelCounter.getValue() == allFlag.length) {
             endGame = true;
             popUp();
             $("#endGame").html("Bien joué ! <br> Vous avez réalisé : " + scoreCounter.getValue() + " points avec " + clicCounter.getValue() + " clics");
