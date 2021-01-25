@@ -64,6 +64,8 @@ function randomLetter() {
                     $("#time").show();
                     $("#joker").show();
                     $('#skip').show();
+                    musique.play();
+                    inGame = true;
                 })
             }
         }
@@ -78,14 +80,16 @@ function skip() {
     $("#texte").html(fullText);
     $("#next").html("C'est parti !").off('click').attr("id", "start");
     $("#skipIntroduction").remove();
-    $("#start").click(function () {
+    $("#start").click(function () {"' "
         $("#introduction").remove();
         nextFlag(levelCounter.getValue());
         start = new Date();
         $("body").removeClass("popup");
         $("#scoreBoard").show();
         $("#time").show();
-        $("#joker").show();
-        $('#skip').show();
+        $("#joker").fadeIn();
+        $('#skip').fadeIn();
+        musique.play();
+        inGame = true;
     })
 }

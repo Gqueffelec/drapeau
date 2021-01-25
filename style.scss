@@ -215,11 +215,13 @@ button {
 }
 
 // same as previous for end game score
-#endGame {
-
+#endGame,
+#points {
+    width: 250px;
     align-self: center;
     justify-self: center;
     @include popUpBox();
+    @include flexNom()
 }
 
 // time div for the actual flag guess
@@ -233,4 +235,12 @@ button {
 
 .joker {
     border: 3px double grey;
+}
+
+#image {
+    align-self: center;
+    height: 192px;
+    width: 192px;
+    background:
+        url('firework.png') 0px 0px;
 }

@@ -24,3 +24,4 @@ var scoreCounter = counter();
 var clicCounter = counter();
 var levelCounter = counter();
 var clicPerFlagCounter = counter();
+var jokerCounterUse = counter();

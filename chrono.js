@@ -21,7 +21,9 @@ function chrono() {
     }
     time = addZero(min) + ":" + addZero(sec) + ":" + msec;
     $('#time').html(time);
-    timer = setTimeout("chrono()", 10);
+    if (!stopChrono) {
+        timer = setTimeout("chrono()", 10);
+    }
 }
 // add a zero to sec and min for display purpose
 function addZero(nombre) {

@@ -1,8 +1,13 @@
+var intervalId;
 var allColorSwitch = ["blue", "green", "red", "yellow", "black", "white"];
 var endGame = false;
 var switchColorEnable = true;
 var actualFlagId = allFlag[levelCounter.getValue()].getCountry();
 var saveOn = false;
+var musique = new Audio("mainMusique.mp3");
+var inGame = false;
+var pointsPerFlag = 0;
+var stopChrono = false;
 
 // function call on refesh or exit
 window.onbeforeunload = function (event) {
@@ -16,16 +21,6 @@ $(document).ready(function () {
     console.log(saveOn);
     if (saveOn == false) {
         popUp();
-        $("#start").click(function () {
-            $("#introduction").remove();
-            nextFlag(levelCounter.getValue());
-            start = new Date();
-            $("body").removeClass("popup");
-            $("#scoreBoard").show();
-            $("#time").show();
-            $("#joker").show();
-            $('#skip').show();
-        })
     } else {
         $("#endGame").hide();
         $("#introduction").remove();
@@ -35,10 +30,11 @@ $(document).ready(function () {
         $("#time").show();
         $("#joker").show();
         $('#skip').show();
+        inGame = true;
+        //  musique.play();
     }
 })
-
-// function to smilaute starting and ending popUp
+// function to simulate starting and ending popUp
 // hiding most of the componant and apply background effect on body to make it "shadowed"
 function popUp() {
     $("body").addClass("popup");
@@ -50,17 +46,34 @@ function popUp() {
     $('#skip').hide();
     if (!endGame) {
         $("#endGame").hide();
-        //    gameRules();
+        if (inGame) {
+            $("#points").show();
+            animateScript();
+            $("#points p").html("Bien joué ! <br> Vous avez réalisé : " + pointsPerFlag + " points avec " + clicPerFlagCounter.getValue() + " clics");
+            clicPerFlagCounter.decrease(clicPerFlagCounter.getValue());
+            $("#points button").click(function () {
+                clearInterval(intervalId);
+                nextFlag(levelCounter.getValue());
+                $("#points").hide();
+                $("body").removeClass("popup");
+                $("#scoreBoard").show();
+                $("#time").show();
+                $("#joker").fadeIn();
+                $('#skip').fadeIn();
+            })
+        }
     } else {
-        $("#endGame").show();
-        $("#introduction").hide();
+        musique.pause();
+        $("#points").show();
+        animateScript();
+        $("#points button").remove();
+        $("#points p").html("Bien joué ! <br> Vous avez réalisé un total de : " + pointsPerFlag + " points avec " + clicPerFlagCounter.getValue() + " clics");
         localStorage.clear();
     }
 }
-
 // initialisation of the game, starting color, clickable div, joker activation, import save
-
 function initialize() {
+    $("#points").hide();
     initialColor("france", "blue");
     initialColor("belgique", "yellow");
     initialColor("allemagne", "red");
@@ -95,16 +108,13 @@ function initialize() {
     validateButton();
     giveUp();
 }
-
 // add click function on the validate Button
 function validateButton() {
     $("#valider").hide().click(function () {
         var optimalClic = allFlag[levelCounter.getValue()].getOptmimalClics();
         calculPoints(optimalClic, clicPerFlagCounter.getValue());
-        clicPerFlagCounter.decrease(clicPerFlagCounter.getValue());
         $('#joker button').prop("disabled", false);
         levelCounter.increase(1)
-        nextFlag(levelCounter.getValue());
         updateScore()
         $(this).hide();
         switchColorEnable = true;
@@ -112,7 +122,10 @@ function validateButton() {
         if (levelCounter.getValue() == 6) {
             endGame = true;
             popUp();
-            $("#endGame").html("Bien joué ! <br> Vous avez réalisé : " + scoreCounter.getValue() + " points avec " + clicCounter.getValue() + " clics")
+            $("#points p").html("Bien joué ! <br> Vous avez réalisé un total de : " + scoreCounter.getValue() + " points avec " + clicCounter.getValue() + " clics")
+        } else {
+            popUp();
+
         }
     })
 }
@@ -141,12 +154,9 @@ function switchColor(flagDiv) {
         saveData();
     })
 }
-
 // check if the color actually displayed are the same than the one in the flag data
-
 function checkSolution() {
     var soluce = allFlag[levelCounter.getValue()].getColors();
-
     var reponse = new Array(soluce.length);
     $("#" + allFlag[levelCounter.getValue()].getCountry()).children().last().children().each(function (i) {
         reponse[i] = "" + $(this).attr('class').replace("joker ", "");
@@ -157,9 +167,11 @@ function checkSolution() {
     }
     if (JSON.stringify(soluce) === JSON.stringify(reponse)) {
         clearTimeout(timer);
-        $("#valider").show();
-        $("#skip").hide();
-        $("#joker").hide();
+        timer = null;
+        stopChrono = true;
+        $("#valider").fadeIn();
+        $("#skip").fadeOut();
+        $("#joker").fadeOut();
         // can't switch color once everything is good 
         switchColorEnable = false;
         $('#joker button').prop("disabled", true);
@@ -175,6 +187,7 @@ function nextFlag(index) {
             start = new Date();
         }
         saveOn = false;
+        stopChrono = false;
         chrono();
     } else {
         $('#time').hide();
@@ -183,16 +196,22 @@ function nextFlag(index) {
 // calcul of the points winning when correct answer is guessed, based on data of the flag
 function calculPoints(optimalClicNumber, actualClicNumber) {
     let clicScore = actualClicNumber - optimalClicNumber;
-    if (clicScore == 0 && diff.getSeconds() <= optimalClicNumber - 2) {
-        scoreCounter.increase(3);
+    var score = 0
+    if (clicScore < 0 && diff.getSeconds() <= optimalClicNumber - 2) {
+        score = 3 - jokerCounterUse.getValue();
     } else if (clicScore == 0) {
-        scoreCounter.increase(2);
+        score = 2 - jokerCounterUse.getValue();
     } else {
-        scoreCounter.increase(1);
+        score = 1 - jokerCounterUse.getValue();
     }
+    if (score < 0) {
+        score = 0;
+    }
+    scoreCounter.increase(score);
+    pointsPerFlag = score;
+    jokerCounterUse.decrease(jokerCounterUse.getValue());
     updateScore();
 }
-
 // update displayed level to the actual one
 function updateLevel() {
     $('#level').html("Niveau " + (levelCounter.getValue() + 1) + "/6 !");
@@ -223,6 +242,7 @@ function saveData() {
 }
 // joker button function, activate only if the div isn't a joker already and not everything is guessed, lock the div on which the joker was use
 function joker() {
+    jokerCounterUse.increase(1);
     var actualFlag = $("#" + allFlag[levelCounter.getValue()].getCountry())
     var numberOfDiv = actualFlag.children().last().children().length;
     if (numberOfDiv == 4) {
@@ -254,4 +274,24 @@ function giveUp() {
             $("#endGame").html("Bien joué ! <br> Vous avez réalisé : " + scoreCounter.getValue() + " points avec " + clicCounter.getValue() + " clics")
         }
     })
+}
+
+
+function animateScript() {
+    var positionX = 192;
+    var positionY = 0;
+    var interval = 50;
+    intervalId = setInterval(function () {
+        document.getElementById("image").style.backgroundPosition =
+            `-${positionX}px -${positionY}px`;
+        if (positionX < 768) {
+            positionX += 192
+        } else if (positionY < 1344) {
+            positionX = 192;
+            positionY += 192;
+        } else {
+            positionX = 192;
+            positionY = 0;
+        }
+    }, interval)
 }

@@ -261,18 +261,26 @@ button {
   background-color: darkgray;
 }
 
-#endGame {
+#endGame,
+#points {
+  width: 250px;
   -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
       align-self: center;
-  -ms-grid-column-align: center;
-      justify-self: center;
+  justify-self: center;
   border: 5px inset grey;
   background: white;
   margin: 5%;
   padding: 5%;
   -webkit-box-shadow: 5px 5px 5px black;
           box-shadow: 5px 5px 5px black;
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 #time {
@@ -285,5 +293,14 @@ button {
 
 .joker {
   border: 3px double grey;
+}
+
+#image {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  height: 192px;
+  width: 192px;
+  background: url("firework.png") 0px 0px;
 }
 /*# sourceMappingURL=style.css.map */
