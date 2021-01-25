@@ -1,6 +1,13 @@
+h1, #france,
+#belgique, #allemagne,
+#hollande, #pologne, #tcheque {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
 #france,
-#belgique,
-#allemagne {
+#belgique {
   width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11,17 +18,8 @@
           flex-direction: column;
 }
 
-#france h1,
-#belgique h1,
-#allemagne h1 {
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-}
-
 #france div,
-#belgique div,
-#allemagne div {
+#belgique div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,15 +30,121 @@
 }
 
 #france div div,
-#belgique div div,
-#allemagne div div {
+#belgique div div {
+  border: 3px solid grey;
   height: 200px;
-  border: 2px double black;
   width: 30%;
 }
 
+#allemagne,
+#hollande {
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#allemagne div,
+#hollande div {
+  border: 2px double grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#allemagne div div,
+#hollande div div {
+  border: 3px solid grey;
+  height: 66px;
+}
+
+#pologne {
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#pologne div {
+  border: 2px double grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#pologne div div {
+  border: 3px solid grey;
+  height: 100px;
+}
+
+#tcheque {
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#tcheque div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  border: 2px double grey;
+}
+
+#tcheque div :first-child,
+#tcheque div :nth-child(2) {
+  height: 100px;
+  z-index: 0;
+  border: 2px double grey;
+}
+
+#tcheque div #triangle {
+  position: absolute;
+  height: 192px;
+  top: 6px;
+  width: 97px;
+  -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
+          clip-path: polygon(0 0, 100% 50%, 0 100%);
+  z-index: 2;
+}
+
+#tcheque div :last-child {
+  position: absolute;
+  height: 204px;
+  width: 104px;
+  -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
+          clip-path: polygon(0 0, 100% 50%, 0 100%);
+  z-index: 1;
+  background-color: grey;
+}
+
 .blue {
-  background-color: blue;
+  background-color: #3030c2;
 }
 
 .red {
@@ -55,6 +159,21 @@
   background-color: yellow;
 }
 
+.black {
+  background-color: black;
+}
+
+.green {
+  background-color: green;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
 body {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -62,16 +181,126 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
 }
 
-#valider {
-  margin-top: 10%;
+body #scoreBoard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 90%;
+  height: 10%;
+  border-radius: 25px;
+  background-color: lightgray;
+  border: 3px double grey;
+}
+
+body #flags {
+  margin: 0;
+  height: 60%;
+  padding: 0;
+}
+
+body #validation {
+  height: 100px;
+}
+
+button {
+  border-radius: 10px;
+  height: 50px;
+  width: 120px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-size: large;
+}
+
+#introduction {
+  position: relative;
+  left: -30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 290px;
+  height: 450px;
+  margin: 0;
+  border: 5px inset grey;
+  background: white;
+  margin: 5%;
+  padding: 5%;
+  -webkit-box-shadow: 5px 5px 5px black;
+          box-shadow: 5px 5px 5px black;
+}
+
+#introduction p {
+  padding: 0 10%;
+}
+
+.popup {
+  background-color: darkgray;
+}
+
+#endGame,
+#points {
+  width: 250px;
+  -ms-flex-item-align: center;
+      align-self: center;
+  justify-self: center;
+  border: 5px inset grey;
+  background: white;
+  margin: 5%;
+  padding: 5%;
+  -webkit-box-shadow: 5px 5px 5px black;
+          box-shadow: 5px 5px 5px black;
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#time {
+  margin: 0 35%;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: lightgray;
+  border: 3px solid grey;
+}
+
+.joker {
+  border: 3px double grey;
+}
+
+#image {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  height: 192px;
+  width: 192px;
+  background: url("firework.png") 0px 0px;
 }
 /*# sourceMappingURL=style.css.map */
