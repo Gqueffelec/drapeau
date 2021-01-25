@@ -263,7 +263,7 @@ function joker() {
     divToLock.removeClass().addClass("joker").addClass(allFlag[levelCounter.getValue()].getColor(randomNthChild));
     checkSolution();
 }
-
+// give up button with no points
 function giveUp() {
     $("#skip button").click(function () {
         levelCounter.increase(1);
@@ -276,7 +276,7 @@ function giveUp() {
     })
 }
 
-
+// animation script for the firework effect, import the sprite and show part of the image one by one on a short interval
 function animateScript() {
     var positionX = 192;
     var positionY = 0;

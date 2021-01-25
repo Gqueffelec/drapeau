@@ -33,7 +33,7 @@ $(function () {
         skip();
     })
 })
-
+// generate random letter object.iterions times (10 default) then append the right one, at the end of each sentence pop a next button or start when the rules are totally displayed
 function randomLetter() {
     var max = texts[i].length;
     var maxRandom = options.characters.length;
@@ -71,7 +71,7 @@ function randomLetter() {
         }
     }
 }
-
+// skip button to display full text rules without animation and start quicker 
 function skip() {
     var fullText = "";
     for (let i = 0; i < texts.length; i++) {
@@ -80,7 +80,7 @@ function skip() {
     $("#texte").html(fullText);
     $("#next").html("C'est parti !").off('click').attr("id", "start");
     $("#skipIntroduction").remove();
-    $("#start").click(function () {"' "
+    $("#start").click(function () {
         $("#introduction").remove();
         nextFlag(levelCounter.getValue());
         start = new Date();
