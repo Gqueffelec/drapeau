@@ -239,7 +239,7 @@ function saveData() {
 // joker button function, activate only if the div isn't a joker already and not everything is guessed, lock the div on which the joker was use
 function joker() {
     jokerCounterUse.increase(1);
-    var actualFlag = $("#" + allFlag[levelCounter.getValue()].getCountry())
+    var actualFlag = $(".drapeau");
     var numberOfDiv = actualFlag.children().last().children().length;
     if (numberOfDiv == 4) {
         numberOfDiv = 3;
@@ -257,11 +257,12 @@ function joker() {
     scoreCounter.decrease(1);
     updateScore();
     divToLock.removeClass().addClass("joker").addClass(allFlag[levelCounter.getValue()].getColor(randomNthChild));
-    checkSolution();
+    checkSolution($(".drapeau").attr("id"));
 }
 // give up button with no points
 function giveUp() {
     $("#skip button").click(function () {
+        $('.drapeau').children().remove();
         levelCounter.increase(1);
         nextFlag(levelCounter.getValue());
         if (levelCounter.getValue() == 6) {

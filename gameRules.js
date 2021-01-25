@@ -23,11 +23,15 @@ var i = 0;
 var textToAppend = "";
 var actualIterations = 0;
 var j = 0;
+var introMusique = new Audio("introMusique.mp3");
 $(function () {
     $("#next").click(function () {
         $('#skipIntroduction').remove();
         $(this).hide();
         randomLetter();
+        if (i == 0) {
+            introMusique.play();
+        }
     })
     $('#skipIntroduction').click(function () {
         skip();
@@ -64,6 +68,7 @@ function randomLetter() {
                     $("#time").show();
                     $("#joker").show();
                     $('#skip').show();
+                    introMusique.pause();
                     music.play();
                     inGame = true;
                 })
