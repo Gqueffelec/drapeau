@@ -4,16 +4,13 @@ h2 {
   text-shadow: 1px 1px 2px #F3CB83;
 }
 
-h1, #france,
-#belgique, #allemagne,
-#hollande, #pologne, #tcheque {
+h1, #row3, #column3, #row2, #row2triangle {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
 }
 
-#france,
-#belgique {
+#row3 {
   width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -24,8 +21,7 @@ h1, #france,
           flex-direction: column;
 }
 
-#france div,
-#belgique div {
+#row3 div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -35,15 +31,13 @@ h1, #france,
           flex-direction: row;
 }
 
-#france div div,
-#belgique div div {
+#row3 div div {
   border: 3px solid black;
   height: 200px;
   width: 30%;
 }
 
-#allemagne,
-#hollande {
+#column3 {
   width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -54,9 +48,7 @@ h1, #france,
           flex-direction: column;
 }
 
-#allemagne div,
-#hollande div {
-  border: 2px double grey;
+#column3 div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -66,13 +58,12 @@ h1, #france,
           flex-direction: column;
 }
 
-#allemagne div div,
-#hollande div div {
+#column3 div div {
   border: 3px solid black;
   height: 66px;
 }
 
-#pologne {
+#row2 {
   width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -83,8 +74,7 @@ h1, #france,
           flex-direction: column;
 }
 
-#pologne div {
-  border: 2px double grey;
+#row2 div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -94,12 +84,12 @@ h1, #france,
           flex-direction: column;
 }
 
-#pologne div div {
+#row2 div div {
   border: 3px solid black;
   height: 100px;
 }
 
-#tcheque {
+#row2triangle {
   width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -110,7 +100,7 @@ h1, #france,
           flex-direction: column;
 }
 
-#tcheque div {
+#row2triangle div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -122,14 +112,14 @@ h1, #france,
   border: 2px double grey;
 }
 
-#tcheque div :first-child,
-#tcheque div :nth-child(2) {
+#row2triangle div :first-child,
+#row2triangle div :nth-child(2) {
   height: 100px;
   z-index: 0;
   border: 2px double grey;
 }
 
-#tcheque div #triangle {
+#row2triangle div #triangle {
   position: absolute;
   height: 192px;
   top: 6px;
@@ -139,7 +129,7 @@ h1, #france,
   z-index: 2;
 }
 
-#tcheque div :last-child {
+#row2triangle div :last-child {
   position: absolute;
   height: 204px;
   width: 104px;

@@ -47,8 +47,7 @@ h1 {
 }
 
 // vertical line flag
-#france,
-#belgique {
+#row3 {
     @include flexNom();
     @extend h1;
 
@@ -56,19 +55,16 @@ h1 {
 
         display: flex;
         flex-direction: row;
-
         @include divLayout($isRow:true);
     }
 }
 
 // horizontal line flag
-#allemagne,
-#hollande {
+#column3 {
     @include flexNom();
     @extend h1;
 
     div {
-        border: 2px double grey;
         display: flex;
         flex-direction: column;
         @include divLayout($isRow:false, $number:3);
@@ -76,12 +72,11 @@ h1 {
 }
 
 // dual line flag
-#pologne {
+#row2 {
     @include flexNom();
     @extend h1;
 
     div {
-        border: 2px double grey;
         display: flex;
         flex-direction: column;
         @include divLayout($isRow:false, $number:2);
@@ -89,7 +84,7 @@ h1 {
 }
 
 // special css for czech flag (triangle mostly plus double div for border
-#tcheque {
+#row2triangle {
     @include flexNom();
     @extend h1;
 
