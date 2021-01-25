@@ -1,0 +1,37 @@
+*   944ec92 Mon, 25 Jan 2021 15:26:40 +0100 | Merge branch 'dev' into main (HEAD -> dev, origin/main, origin/dev, main) [Guillaume QUEFFELEC]
+|\  
+| * 695c976 Mon, 25 Jan 2021 15:26:28 +0100 | son intro et réparation joker / abandon [Guillaume QUEFFELEC]
+| * 3db01bf Mon, 25 Jan 2021 15:16:07 +0100 | random générator de color et calcul du nombre de clic optimal en fonction de la couleur générée [Guillaume QUEFFELEC]
+* | ac6a303 Mon, 25 Jan 2021 14:44:06 +0100 | Merge branch 'dev' into main [Guillaume QUEFFELEC]
+|\| 
+| * ebca775 Mon, 25 Jan 2021 14:43:53 +0100 | creation de drapeau dynamique via js, ajout plus facile de nouveau drapeau [Guillaume QUEFFELEC]
+* | b1b77c3 Mon, 25 Jan 2021 12:12:09 +0100 | Merge branch 'dev' into main [Guillaume QUEFFELEC]
+|\| 
+| * cf9cff1 Mon, 25 Jan 2021 12:11:56 +0100 | changement de la musique et titre du jeu [Guillaume QUEFFELEC]
+|/  
+*   540ffe3 Mon, 25 Jan 2021 11:27:35 +0100 | Merge branch 'dev' into main [Guillaume QUEFFELEC]
+|\  
+| * 9679938 Mon, 25 Jan 2021 11:27:14 +0100 | commentaire finaux + design visuel [Guillaume QUEFFELEC]
+* | 718ce93 Mon, 25 Jan 2021 10:27:29 +0100 | Merge branch 'dev' into main [Guillaume QUEFFELEC]
+|\| 
+| * 951304c Mon, 25 Jan 2021 10:21:31 +0100 | ajout son, et animation sur le pop de victoire [Guillaume QUEFFELEC]
+| * 4737fa5 Sun, 24 Jan 2021 19:16:58 +0100 | reload recharge le temps clic et directement sur la page de jeu [Guillaume QUEFFELEC]
+| * 24d410e Sun, 24 Jan 2021 18:29:36 +0100 | animation du texte d'intro lettre par lettre avec random lettre avant, type matrix + bouton skip pour passer l'animation [Guillaume QUEFFELEC]
+| * 7846f06 Sat, 23 Jan 2021 18:50:20 +0100 | preparation envoi server AWS [Guillaume QUEFFELEC]
+| * 901f18b Sat, 23 Jan 2021 00:14:53 +0100 | add commentary line on all the JS et SCSS code, not needed for html + creation text animation class for later [Guillaume QUEFFELEC]
+| * e9ede66 Fri, 22 Jan 2021 14:54:41 +0100 | création de closure pour les drapeaux et optimisations du code + sépararation en plusieurs javascrip [Guillaume QUEFFELEC]
+| * 9d95f51 Fri, 22 Jan 2021 13:47:06 +0100 | ajout bouton joker sans fonction [Guillaume QUEFFELEC]
+| * d553390 Fri, 22 Jan 2021 13:46:36 +0100 | lecture de la sauvegarde en JSON + réinitialisation quand arrivé à l'écran des scores [Guillaume QUEFFELEC]
+| * 97b49f0 Fri, 22 Jan 2021 13:21:29 +0100 | sauvegarde des données en JSON [Guillaume QUEFFELEC]
+| * 7a6d1c9 Fri, 22 Jan 2021 12:13:46 +0100 | ajout contrainte pour cliquer sur les drapeaux quand la solution a été trouvée [Guillaume QUEFFELEC]
+| * 67b3d73 Fri, 22 Jan 2021 12:05:25 +0100 | ajout closure pour le score, toutes les couleurs disponibles quand on clic et ajustement du clic optimal [Guillaume QUEFFELEC]
+| * 1412ba5 Fri, 22 Jan 2021 10:59:57 +0100 | Chrono individuel pour chaque drapeau, prépartion de l'implementation du score [Guillaume QUEFFELEC]
+| * 58dfeb3 Fri, 22 Jan 2021 08:30:54 +0100 | ajout du score board avec niveau,timer et clics + valider apparait uniquement avec la bonne solution [Guillaume QUEFFELEC]
+| * 465a8bc Thu, 21 Jan 2021 20:34:51 +0100 | algo de verification des couleurs pour tous les drapeaux [Guillaume QUEFFELEC]
+| * af3c0b1 Thu, 21 Jan 2021 19:47:54 +0100 | optimisation visuelle des drapeaux, clic permet de passer au drapeau suivant [Guillaume QUEFFELEC]
+| * e2a3ab6 Thu, 21 Jan 2021 19:26:20 +0100 | détail bordure pour plus de lisibilité + code on click ca switch de couleur du drapeau [Guillaume QUEFFELEC]
+| * b796551 Thu, 21 Jan 2021 19:22:43 +0100 | ajout tchequie! [Guillaume QUEFFELEC]
+| * 628c7cc Thu, 21 Jan 2021 18:08:33 +0100 | mise en forme sass et couleur de base sauf Tchequie [Guillaume QUEFFELEC]
+|/  
+* 9900229 Thu, 21 Jan 2021 17:23:21 +0100 | base de code html et scss [Guillaume QUEFFELEC]
+* 01b8447 Thu, 21 Jan 2021 16:08:19 +0100 | initial commit [Guillaume QUEFFELEC]
