@@ -67,7 +67,7 @@ function popUp() {
         $("#points").show();
         animateScript();
         $("#points button").remove();
-        $("#points p").html("Bien joué ! <br> Vous avez réalisé un total de : " + pointsPerFlag + " points avec " + clicPerFlagCounter.getValue() + " clics").append('<br><br><button onClick="window.location.reload();">Recommencer</button>');
+        $("#points p").html("Bien joué ! <br> Vous avez réalisé un total de : " + pointsPerFlag + " points avec " + clicPerFlagCounter.getValue() + " clics");
         localStorage.clear();
     }
 }
@@ -268,8 +268,7 @@ function giveUp() {
         if (levelCounter.getValue() == 6) {
             endGame = true;
             popUp();
-            $("#endGame").html("Bien joué ! <br> Vous avez réalisé : " + scoreCounter.getValue() + " points avec " + clicCounter.getValue() + " clics");
-
+            $("#endGame").html("Bien joué ! <br> Vous avez réalisé : " + scoreCounter.getValue() + " points avec " + clicCounter.getValue() + " clics")
         }
     })
 }

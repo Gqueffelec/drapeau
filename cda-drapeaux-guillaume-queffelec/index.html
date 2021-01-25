@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="flag.js"></script>
+    <script src="counter.js"></script>
+    <script src="chrono.js"></script>
+    <script src="script.js"></script>
+    <script src="gameRules.js"></script>
+    <script src="https://kit.fontawesome.com/864a21a265.js" crossorigin="anonymous"></script>
+    <title>Questions pour un Drapeau</title>
+</head>
+
+<body>
+
+    <h2><i class="far fa-flag"></i> Questions pour un Drapeau ! <i class="far fa-flag"></i></h2>
+
+    <div id="scoreBoard">
+        <span id="level"></span>
+        <span id="score"></span>
+        <span id="clic"></span>
+    </div>
+    <div id="points">
+        <div id="image"> </div>
+        <p></p>
+        <button>Next</button>
+    </div>
+    <div id="introduction">
+        <p id="texte"></p>
+        <button id="next">Next</button>
+        <button id="skipIntroduction">Skip</button>
+    </div>
+    <div id="flags">
+        <span id="time"></span>
+        <div id="actualFlag" class="drapeau"> </div>
+    </div>
+    <div id="joker">
+        <button>Joker (1pt)</button>
+    </div>
+    <div id="skip">
+        <button>Abandonner</button>
+    </div>
+    <div id="validation">
+        <button id="valider" value="valider">Valider</button>
+    </div>
+
+</body>
+
+</html>
