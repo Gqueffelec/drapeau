@@ -1,5 +1,5 @@
 var intervalId;
-var allColorSwitch = ["blue", "green", "red", "yellow", "black", "white"];
+var allColorSwitch = ["blue", "red", "green", "yellow", "black", "white"];
 var endGame = false;
 var switchColorEnable = true;
 var actualFlagId = allFlag[levelCounter.getValue()].getCountry();
@@ -39,7 +39,6 @@ $(document).ready(function () {
 // hiding most of the componant and apply background effect on body to make it "shadowed"
 function popUp() {
     $("body").addClass("popup");
-    $('.drapeau').hide();
     $('#time').hide();
     $("#scoreBoard").hide();
     $('#valider').hide();
@@ -75,26 +74,13 @@ function popUp() {
 // initialisation of the game, starting color, clickable div, joker activation, import save
 function initialize() {
     $("#points").hide();
-    initialColor("france", "blue");
-    initialColor("belgique", "yellow");
-    initialColor("allemagne", "red");
-    initialColor("hollande", "white");
-    initialColor("pologne", "red");
-    initialColor("tcheque", "red");
-    switchColor("france");
-    switchColor("belgique");
-    switchColor("hollande");
-    switchColor("allemagne");
-    switchColor("pologne");
-    switchColor("tcheque");
     $("#joker").click(function () {
         joker()
     });
-
     // parse du JSON to recover saved data 
     const save = JSON.parse(localStorage.getItem("save"));
     if (save == null) {
-
+        saveData();
     } else {
         scoreCounter.increase(save.score);
         clicCounter.increase(save.clicNumber);
@@ -118,6 +104,7 @@ function validateButton() {
         levelCounter.increase(1)
         updateScore()
         $(this).hide();
+        $(".drapeau").children().remove();
         switchColorEnable = true;
         // if it was the last flag, validate the game and display the final score
         if (levelCounter.getValue() == 6) {
@@ -150,21 +137,27 @@ function switchColor(flagDiv) {
             }
             let newColor = allColorSwitch[newColorIndex];
             $(this).removeClass(color).addClass(newColor);
-            checkSolution();
+            checkSolution(flagDiv);
         }
         saveData();
     })
 }
 // check if the color actually displayed are the same than the one in the flag data
-function checkSolution() {
-    var soluce = allFlag[levelCounter.getValue()].getColors();
+function checkSolution(flagDiv) {
+    console.log(allFlag[levelCounter.getValue()].getCountry());
+    var soluce = new Array(allFlag[levelCounter.getValue()].getColors().length);
+    for (let i = 0; i < soluce.length; i++) {
+        soluce[i] = allFlag[levelCounter.getValue()].getColor(i);
+    }
+    console.log(typeof soluce)
     var reponse = new Array(soluce.length);
-    $("#" + allFlag[levelCounter.getValue()].getCountry()).children().last().children().each(function (i) {
+    $("#" + flagDiv).children().last().children().each(function (i) {
         reponse[i] = "" + $(this).attr('class').replace("joker ", "");
     })
     // case for czech republic with one fake div 
     if (levelCounter.getValue() == 5) {
         reponse.pop();
+        soluce.pop();
     }
     if (JSON.stringify(soluce) === JSON.stringify(reponse)) {
         clearTimeout(timer);
@@ -181,8 +174,10 @@ function checkSolution() {
 // switch the game to the next flag and start new chrono
 function nextFlag(index) {
     if (index != 6) {
-        $(".drapeau").hide();
-        $("#" + allFlag[index].getCountry()).show();
+        $(".drapeau").children().each(function () {
+            $(this).remove();
+        });
+        createFlag(allFlag[index]);
         updateLevel();
         if (!saveOn) {
             start = new Date();
@@ -198,7 +193,7 @@ function nextFlag(index) {
 function calculPoints(optimalClicNumber, actualClicNumber) {
     let clicScore = actualClicNumber - optimalClicNumber;
     var score = 0
-    if (clicScore < 0 && diff.getSeconds() <= optimalClicNumber - 2) {
+    if (clicScore <= 0 && diff.getSeconds() <= optimalClicNumber - 2) {
         score = 3 - jokerCounterUse.getValue();
     } else if (clicScore == 0) {
         score = 2 - jokerCounterUse.getValue();
@@ -217,7 +212,7 @@ function calculPoints(optimalClicNumber, actualClicNumber) {
 function updateLevel() {
     $('#level').html("Niveau " + (levelCounter.getValue() + 1) + "/6 !");
 }
-// update number of clicks displayed
+// update number of clicks displayed 
 function updateClic() {
     $('#clic').html("Nombre de clics : " + clicCounter.getValue());
 }
