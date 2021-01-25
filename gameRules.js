@@ -64,7 +64,7 @@ function randomLetter() {
                     $("#time").show();
                     $("#joker").show();
                     $('#skip').show();
-                    musique.play();
+                    music.play();
                     inGame = true;
                 })
             }
@@ -89,7 +89,7 @@ function skip() {
         $("#time").show();
         $("#joker").fadeIn();
         $('#skip').fadeIn();
-        musique.play();
+        music.play();
         inGame = true;
     })
 }
