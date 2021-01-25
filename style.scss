@@ -8,7 +8,7 @@
 // function for flag div display (vertical or horizontal)
 @mixin divLayout($isRow :true, $number:3) {
     div {
-        border: 3px solid grey;
+        border: 3px solid black;
 
         @if($isRow) {
             height: 200px;
@@ -34,6 +34,10 @@
     margin: 5%;
     padding: 5%;
     box-shadow: 5px 5px 5px black;
+}
+
+h2 {
+    text-shadow: 1px 1px 2px #F3CB83;
 }
 
 h1 {
@@ -151,6 +155,8 @@ body {
     width: 100%;
     height: 100%;
     margin: 0;
+    background: rgb(26, 69, 85);
+    background: linear-gradient(216deg, rgba(26, 69, 85, 1) 0%, rgba(75, 140, 146, 1) 31%);
 }
 
 // main page disposition for optimal smartphone display, work for computer but not as beautifull
@@ -162,6 +168,7 @@ body {
 
     // scoreboard box display
     #scoreBoard {
+        margin-top: 5%;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -169,8 +176,8 @@ body {
         width: 90%;
         height: 10%;
         border-radius: 25px;
-        background-color: lightgray;
-        border: 3px double grey;
+        background-color: #4b8c92;
+        border: 3px double #F3CB83;
     }
 
     #flags {
@@ -196,7 +203,6 @@ button {
 // css to simulate popUp Box for introduction and game rules
 #introduction {
     position: relative;
-    left: -30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -210,18 +216,17 @@ button {
     }
 }
 
-.popup {
-    background-color: darkgray;
-}
-
-// same as previous for end game score
-#endGame,
+// same as previous for score
 #points {
-    width: 250px;
     align-self: center;
     justify-self: center;
     @include popUpBox();
     @include flexNom()
+}
+
+// when popup is active color the back in darkgrey
+.popup {
+    background-color: darkgray;
 }
 
 // time div for the actual flag guess
@@ -229,14 +234,11 @@ button {
     margin: 0 35%;
     padding: 5px;
     border-radius: 5px;
-    background-color: lightgray;
-    border: 3px solid grey;
+    background-color: #4b8c92;
+    border: 3px double #F3CB83;
 }
 
-.joker {
-    border: 3px double grey;
-}
-
+// firework image size
 #image {
     align-self: center;
     height: 192px;

@@ -1,3 +1,7 @@
+h2 {
+  text-shadow: 1px 1px 2px #F3CB83;
+}
+
 h1, #france,
 #belgique, #allemagne,
 #hollande, #pologne, #tcheque {
@@ -31,7 +35,7 @@ h1, #france,
 
 #france div div,
 #belgique div div {
-  border: 3px solid grey;
+  border: 3px solid black;
   height: 200px;
   width: 30%;
 }
@@ -62,7 +66,7 @@ h1, #france,
 
 #allemagne div div,
 #hollande div div {
-  border: 3px solid grey;
+  border: 3px solid black;
   height: 66px;
 }
 
@@ -89,7 +93,7 @@ h1, #france,
 }
 
 #pologne div div {
-  border: 3px solid grey;
+  border: 3px solid black;
   height: 100px;
 }
 
@@ -172,6 +176,8 @@ body {
   width: 100%;
   height: 100%;
   margin: 0;
+  background: #1a4555;
+  background: linear-gradient(216deg, #1a4555 0%, #4b8c92 31%);
 }
 
 body {
@@ -190,6 +196,7 @@ body {
 }
 
 body #scoreBoard {
+  margin-top: 5%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -205,8 +212,8 @@ body #scoreBoard {
   width: 90%;
   height: 10%;
   border-radius: 25px;
-  background-color: lightgray;
-  border: 3px double grey;
+  background-color: #4b8c92;
+  border: 3px double #F3CB83;
 }
 
 body #flags {
@@ -231,7 +238,6 @@ button {
 
 #introduction {
   position: relative;
-  left: -30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -257,13 +263,7 @@ button {
   padding: 0 10%;
 }
 
-.popup {
-  background-color: darkgray;
-}
-
-#endGame,
 #points {
-  width: 250px;
   -ms-flex-item-align: center;
       align-self: center;
   justify-self: center;
@@ -283,16 +283,16 @@ button {
           flex-direction: column;
 }
 
+.popup {
+  background-color: darkgray;
+}
+
 #time {
   margin: 0 35%;
   padding: 5px;
   border-radius: 5px;
-  background-color: lightgray;
-  border: 3px solid grey;
-}
-
-.joker {
-  border: 3px double grey;
+  background-color: #4b8c92;
+  border: 3px double #F3CB83;
 }
 
 #image {
