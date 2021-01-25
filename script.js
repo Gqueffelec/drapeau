@@ -4,7 +4,8 @@ var endGame = false;
 var switchColorEnable = true;
 var actualFlagId = allFlag[levelCounter.getValue()].getCountry();
 var saveOn = false;
-var musique = new Audio("mainMusique.mp3");
+var music = new Audio("mainMusique.mp3");
+music.loop = true;
 var inGame = false;
 var pointsPerFlag = 0;
 var stopChrono = false;
@@ -31,7 +32,7 @@ $(document).ready(function () {
         $("#joker").show();
         $('#skip').show();
         inGame = true;
-        //  musique.play();
+        //  music.play();
     }
 })
 // function to simulate starting and ending popUp
@@ -63,7 +64,7 @@ function popUp() {
             })
         }
     } else {
-        musique.pause();
+        music.pause();
         $("#points").show();
         animateScript();
         $("#points button").remove();
@@ -100,7 +101,7 @@ function initialize() {
         levelCounter.increase(save.level);
         start = new Date() - new Date(save.time);
         saveOn = true;
-        console.log(start);
+        music.play();
     }
     updateLevel();
     updateClic();
