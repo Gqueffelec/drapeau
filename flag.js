@@ -37,7 +37,7 @@ var flag = function (pCountry, pNumberOfColor, color1, color2, color3, pDirectio
 
     }
 }
-//creation of basic flag for the game, more can be add later
+//creation of basic flag for the game, more can be add later based on row3, column3, row2 and row2triangle pattern
 
 var flagFrance = flag("france", 3, "blue", "white", "red", "row3");
 var flagBelgique = flag("belgique", 3, "black", "yellow", "red", "row3");
@@ -45,9 +45,10 @@ var flagAllemagne = flag("allemagne", 3, "black", "red", "yellow", "column3");
 var flagHollande = flag("hollande", 3, "red", "white", "blue", "column3");
 var flagPologne = flag("pologne", 2, "white", "red", null, "row2");
 var flagTcheque = flag("tcheque", 4, "white", "red", "blue", "row2triangle");
+var flagAutriche = flag("autriche", 3, "red", "white", "red", "row3");
 
 // array of all flag
-var allFlag = [flagFrance, flagBelgique, flagAllemagne, flagHollande, flagPologne, flagTcheque];
+var allFlag = [flagFrance, flagBelgique, flagAllemagne, flagHollande, flagPologne, flagTcheque, flagAutriche];
 // create a new flag, with the div etc..
 function createFlag(flag) {
     var flagDiv = $(".drapeau");
